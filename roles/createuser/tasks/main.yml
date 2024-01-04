@@ -1,0 +1,46 @@
+---
+
+#- name: Add the user 'ansible' with a specific uid and a primary group of 'adm'
+#  ansible.builtin.user:
+#    name: ansible
+#    comment: ansible
+#    uid: 1042
+#    shell: /bin/bash
+#    groups: adm,sudo
+#    append: yes
+
+
+- name: Add the user 'apple' with a specific uid and a primary group of 'ubuntu'
+  ansible.builtin.user:
+    name: apple
+    comment: apple
+    uid: 1043
+    shell: /bin/bash
+    group: ubuntu
+    
+- name: Add the user 'banana' with a specific uid and a primary group of 'ubuntu'
+  ansible.builtin.user:
+    name: banana
+    comment: banana
+    uid: 1044
+    shell: /bin/bash
+    group: ubuntu
+    
+- name: Add the user 'carrot' with a specific uid and a primary group of 'ubuntu'
+  ansible.builtin.user:
+    name: carrot
+    comment: carrot
+    uid: 1045
+    shell: /bin/bash
+    group: ubuntu
+
+- name: Change file permission for shadow
+  ansible.builtin.file:
+    path: /etc/shadow
+    mode: '0400'
+
+- name: Change file permission for shadow
+  ansible.builtin.file:
+    path: /var/log/syslog
+    mode: '0600'
+

@@ -1,0 +1,9 @@
+---
+- name: Frontend playbook
+  connection: local
+  hosts: localhost
+  become: yes
+  roles:
+  - common
+  - createuser
+  - frontend

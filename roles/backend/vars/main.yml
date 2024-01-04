@@ -1,0 +1,6 @@
+---
+# vars file for backend
+
+#backend_filepath: /etc/ansible/roles/backend/files/backend.zip
+backend_s3_filepath: s3://skillup-s3-jon.julian/backend.zip
+

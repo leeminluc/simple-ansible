@@ -1,0 +1,49 @@
+---
+# tasks file for backend
+
+- name: Install apache2
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - apache2
+    - libapache2-mod-php
+
+- name: create /tmp/befiles
+  file:
+    path: /tmp/befiles
+    state: directory
+
+- name: Copy backend.zip s3 file
+  command: aws s3 cp "{{ backend_s3_filepath }}" /tmp/befiles
+
+- name: Clean /var/www/html
+  file:
+    path: /var/www/html/
+    state: absent
+
+- name: Create /var/www/html
+  file:
+    path: /var/www/html/
+    state: directory
+
+- name: Unzip web server file
+  unarchive:
+    src: /tmp/befiles/backend.zip
+    dest: /var/www/html
+
+#- name: Copy html file to /var/www/html
+#  command: sudo cp -p /var/www/html/backend/index.html /var/www/html/index.html
+
+- name: Change permission
+  command: sudo chmod 666 /var/www/html/index.html
+
+- name: Start apache
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+
+- name: Input IP address
+  shell: sudo ec2metadata --local-hostname  >> /var/www/html/index.html

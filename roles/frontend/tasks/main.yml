@@ -1,0 +1,68 @@
+---
+# tasks file for frontend
+
+- name: Install apache2, mysql-client, php
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - apache2
+    - libapache2-mod-php
+    - mysql-client
+    - php
+
+- name: create /tmp/fefiles
+  file:
+    path: /tmp/fefiles
+    state: directory
+
+- name: Copy frontend.zip s3 file
+  command: aws s3 cp "{{ frontend_s3_filepath }}" /tmp/fefiles
+
+- name: Clean /var/www/html
+  file:
+    path: /var/www/html/
+    state: absent
+
+- name: Create /var/www/html
+  file:
+    path: /var/www/html/
+    state: directory
+
+- name: Unzip web server file
+  unarchive:
+    src: /tmp/fefiles/frontend.zip
+    dest: /var/www/html
+
+#- name: Copy html file to /var/www/html
+#  command: sudo cp -p /var/www/html/frontend/index.txt /var/www/html/index.html
+
+- name: Change permission
+  command: sudo chmod 666 /var/www/html/index.html
+
+- name: Start apache
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+
+- name: Clean /tmp/fefiles
+  file:
+    path: /tmp/fefiles
+    state: absent
+
+- name: Input IP address
+  shell: sudo ec2metadata --local-hostname  >> /var/www/html/index.html
+
+- name: Remove user
+  user:
+    name: carrot
+    remove: yes
+    state: absent
+
+- name: Remove user Test
+  user:
+    name: test
+    remove: yes
+    state: absent

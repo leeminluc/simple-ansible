@@ -1,0 +1,23 @@
+#!/bin/bash
+## install git and awscli
+
+sudo apt-get -y update && apt-get -y upgrade
+sudo apt-get install git -y
+sudo apt-get install awscli -y
+sudo apt-get install -y python3 cloud-utils ansible python3-boto3 python3-botocore
+
+#download ansible code from git repo
+sudo git clone https://github.com/leeminluc/ansible.git
+sudo cp -pr /ansible/* /etc/ansible
+rm -rf ansible
+
+sleep 50
+
+#get ansible role using awscli command
+export AWS_DEFAULT_REGION=us-east-2
+instance_id=$(ec2metadata --instance-id)
+ansible_role=$(aws ec2 describe-instances --region $AWS_DEFAULT_REGION --instance-id $instance_id --out text --query 'Reservations[].Instances[].Tags[?Key==`ansible_role`].Value')
+
+#Execute ansible command
+cd /etc/ansible
+sudo ansible-playbook -v base_playbook.yml -i localhost --extra-vars "ansible_role=$ansible_role"

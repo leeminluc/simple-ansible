@@ -1,0 +1,41 @@
+---
+# tasks file for common
+
+- name: Update packages
+  apt:
+    upgrade: dist
+    update_cache: yes
+
+- name: Copy sshd_config file
+  copy:
+    src: "{{ sshd_config_filepath }}"
+    dest: /etc/ssh/sshd_config
+    backup: yes
+
+- name: Copy pem file
+  copy:
+    src: "{{ pem_filepath }}"
+    dest: /home/ubuntu/
+    backup: yes
+
+- name: Restart sshd
+  service:
+    name: sshd
+    state: restarted
+
+- name: Copy logrotate file
+  copy:
+    src: "{{ logrotate_filepath }}"
+    dest: /etc/logrotate.d/
+
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ packages }}"
+
+- name: Delete user Test
+  user:
+    name: test
+    state: absent
