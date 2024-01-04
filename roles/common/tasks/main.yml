@@ -1,5 +1,5 @@
 ---
-# tasks file for common
+# common ansible role
 
 - name: Update packages
   apt:

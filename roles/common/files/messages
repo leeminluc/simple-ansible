@@ -1,6 +1,6 @@
 /var/log/messages
 {
-        rotate 53
+        rotate 30
         weekly
         missingok
         notifempty

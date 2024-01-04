@@ -3,3 +3,12 @@
 
 #frontend_filepath: /etc/ansible/roles/frontend/files/frontend.zip
 frontend_s3_filepath: s3://skillup-s3-jon.julian/frontend.zip
+frontend_packages:
+  - apache2
+  - libapache2-mod-php
+  - mysql-client
+  - php
+normal_users:
+  - apple
+  - banana
+  - carrot
