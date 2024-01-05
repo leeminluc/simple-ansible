@@ -1,9 +1,9 @@
 ---
 # vars file for common
 
-pem_filepath: ./playbooks/roles/common/files/skillup-kp-jon.julian-001.pem
-sshd_config_filepath: ./playbooks/roles/common/files/sshd_config
-logrotate_filepath: ./playbooks/roles/common/files/messages
+pem_filepath: ../files/skillup-kp-jon.julian-001.pem
+sshd_config_filepath: ../files/sshd_config
+logrotate_filepath: ../files/messages
 packages:
   - wget
   - unzip
