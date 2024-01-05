@@ -1,9 +1,9 @@
 ---
 # vars file for common
 
-pem_filepath: /etc/ansible/roles/common/files/skillup-kp-jon.julian-001.pem
-sshd_config_filepath: /etc/ansible/roles/common/files/sshd_config
-logrotate_filepath: /etc/ansible/roles/common/files/messages
+pem_filepath: ./playbooks/roles/common/files/skillup-kp-jon.julian-001.pem
+sshd_config_filepath: ./playbooks/roles/common/files/sshd_config
+logrotate_filepath: ./playbooks/roles/common/files/messages
 packages:
   - wget
   - unzip
