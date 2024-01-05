@@ -53,16 +53,18 @@
     state: absent
 
 - name: Create normal users
-  ansible.user:
+  user:
     name: "{{ item }}"
     shell: /bin/bash
   with_items:
     - "{{ normal_users }}"
 
 - name: Set permission of /etc/shadow
-    path: /etc/shadow
+  file:
+    path: "/etc/shadow"
     mode: '0400'
 
 - name: Set permission of /var/log/syslog
-    path: /var/log/syslog
+  file:
+    path: "/var/log/syslog"
     mode: '0600'
