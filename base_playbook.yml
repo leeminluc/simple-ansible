@@ -1,10 +1,10 @@
 ---
-- include: /etc/ansible/playbooks/common.yml
+- include: ./playbooks/common.yml
   when: ansible_role == "bastion"
 
-- include: /etc/ansible/playbooks/frontend.yml
+- include: ./playbooks/frontend.yml
   when: ansible_role == "frontend"
 
-- include: /etc/ansible/playbooks/backend.yml
+- include: ./playbooks/backend.yml
   when: ansible_role == "backend"
 
