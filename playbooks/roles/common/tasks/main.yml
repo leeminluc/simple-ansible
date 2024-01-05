@@ -12,12 +12,6 @@
     dest: /etc/ssh/sshd_config
     backup: yes
 
-- name: Copy pem file
-  copy:
-    src: "{{ pem_filepath }}"
-    dest: /home/ubuntu/
-    backup: yes
-
 - name: Restart sshd
   service:
     name: sshd
