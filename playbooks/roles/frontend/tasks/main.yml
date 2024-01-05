@@ -3,11 +3,9 @@
 
 - name: Install apache2, mysql-client, php
   apt:
-    name: "{{ item }}"
+    name: ['{{ frontend_packages }}']
     state: present
     update_cache: yes
-  with_items:
-    - "{{ frontend_packages }}"
 
 - name: create /tmp/fefiles
   file:

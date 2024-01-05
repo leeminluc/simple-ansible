@@ -3,12 +3,9 @@
 
 - name: Install apache2
   apt:
-    name: "{{ item }}"
+    name: ['apache2', 'libapache2-mod-php']
     state: present
     update_cache: yes
-  with_items:
-    - apache2
-    - libapache2-mod-php
 
 - name: create /tmp/befiles
   file:
