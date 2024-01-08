@@ -33,7 +33,7 @@
     dest: /var/www/html
 
 - name: Change permission
-  command: sudo chmod 666 /var/www/html/index.html
+  command: sudo chmod 666 /var/www/html/index.php
 
 - name: Start apache
   service:

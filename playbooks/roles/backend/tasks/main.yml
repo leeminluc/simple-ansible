@@ -31,13 +31,10 @@
     dest: /var/www/html
 
 - name: Change permission
-  command: sudo chmod 666 /var/www/html/index.html
+  command: sudo chmod 666 /var/www/html/index.php
 
 - name: Start apache
   service:
     name: apache2
     state: started
     enabled: yes
-
-- name: Input IP address
-  shell: sudo ec2metadata --local-hostname  >> /var/www/html/index.html
